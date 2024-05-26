@@ -1,0 +1,30 @@
+m = [
+    [2,6],     #1
+    [1,6],     #2
+    [9,10],    #3
+    [7],       #4
+    [8,9],     #5
+    [1,2],     #6
+    [4],       #7
+    [5,9,10],  #8
+    [3,5,8],   #9
+    [3,8],     #10
+]
+
+visited = set()
+connected_components = []
+
+def find(node, component):
+    visited.add(node)
+    component.append(node)
+    for neighbor in m[node - 1]:
+        if neighbor not in visited:
+            find(neighbor, component)
+
+for node in range(1, len(m) + 1):
+    if node not in visited:
+        component = []
+        find(node, component)
+        connected_components.append(component)
+
+print("Компоненты связности:", connected_components)
